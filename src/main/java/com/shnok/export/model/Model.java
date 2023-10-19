@@ -1,5 +1,6 @@
 package com.shnok.export.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 @Getter
@@ -13,6 +14,7 @@ public class Model {
     private Vector3 vec2;
     private Vector3 vec3;
     private float f1;
+    @JsonIgnore
     private int polyIndex;
     private Poly poly;
 }

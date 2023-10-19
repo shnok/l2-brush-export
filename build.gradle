@@ -7,21 +7,17 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.github.acmi:serializer:+'
-    implementation 'com.github.acmi:l2io:+'
-    implementation 'com.github.acmi:l2unreal:+'
-    implementation 'com.github.acmi:l2crypt:+'
     implementation 'org.apache.logging.log4j:log4j-api:2.21.0'
     implementation 'org.apache.logging.log4j:log4j-core:2.21.0'
     implementation 'log4j:log4j:1.2.16'
+    implementation 'commons-io:commons-io:2.5'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
-
 }
 
 test {

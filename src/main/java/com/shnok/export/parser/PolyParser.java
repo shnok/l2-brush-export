@@ -76,10 +76,12 @@ public class PolyParser extends DataParser {
             /*readByte(input);
             readByte(input);*/
 
+            readByte(input);
+
             polyData.setPolyIndex(readByte(input));
             System.out.println("Poly index: " + polyData.getPolyIndex());
 
-            readByte(input);
+
             readByte(input);
             readByte(input);
             readByte(input);

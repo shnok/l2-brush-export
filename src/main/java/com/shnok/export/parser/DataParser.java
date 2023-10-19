@@ -5,10 +5,7 @@ import acmi.l2.clientmod.unreal.UnrealRuntimeContext;
 import acmi.l2.clientmod.unreal.properties.PropertiesUtil;
 import com.shnok.export.model.Vector3;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class DataParser {
 
@@ -64,12 +61,9 @@ public abstract class DataParser {
         return new Vector3(x, y, z);
     }
 
-    static void checkPolyFlags(int value) {
-        System.out.println("Polyflags:");
-
+    public static List<String> parsePolyFlags(int value) {
         if(value == 0) {
-            System.out.println("Default");
-            return;
+            return Arrays.asList("PF_Default");
         }
 
         Map<String, Integer> flags = new HashMap<>();
@@ -123,6 +117,24 @@ public abstract class DataParser {
 
         for (String flag : setFlags) {
             System.out.println(flag);
+        }
+
+        return setFlags;
+    }
+
+    public static String parseCsgOper(int value) {
+        if(value == 0) {
+            return "CSG_ACTIVE";
+        } else if(value == 1) {
+            return "CSG_Add";
+        } else if(value == 2) {
+            return "CSG_Subtract";
+        } else if(value == 3) {
+            return "CSG_Intersect";
+        } else if(value == 4) {
+            return "CSG_Deintersect";
+        } else {
+            return "CSG_ERROR";
         }
     }
 }
