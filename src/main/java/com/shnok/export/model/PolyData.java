@@ -10,7 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class PolyData {
-    private int polyIndex;
     private Vector3 origin;
     private Vector3 normal;
     private Vector3 textureU;

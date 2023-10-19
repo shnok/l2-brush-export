@@ -52,6 +52,10 @@ public class BrushParser extends DataParser {
             brush.setPolyFlags(Arrays.asList("PF_Default"));
         }
 
+        if(brush.getGroup() == null) {
+            brush.setGroup("None");
+        }
+
         System.out.println(brush);
 
         return brush;

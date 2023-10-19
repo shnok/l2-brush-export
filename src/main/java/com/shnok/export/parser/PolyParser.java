@@ -68,28 +68,29 @@ public class PolyParser extends DataParser {
             }
             polyData.setVertices(vertices);
 
-            readByte(input);
 
-            readInt(input);
 
             readByte(input);
+            readByte(input);
+            readByte(input);
+            readByte(input);
+            readByte(input);
+            readByte(input);
+            readByte(input);
+
+            readByte(input);
+
             /*readByte(input);
+            readByte(input);
+            readByte(input);
             readByte(input);*/
+            readInt(input);
+            readByte(input);
+            readByte(input);
+            readByte(input);
+            readByte(input);
+            readByte(input);
 
-            readByte(input);
-
-            polyData.setPolyIndex(readByte(input));
-            System.out.println("Poly index: " + polyData.getPolyIndex());
-
-
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
 
             polys.add(polyData);
         }

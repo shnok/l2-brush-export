@@ -5,6 +5,7 @@ import acmi.l2.clientmod.unreal.Environment;
 import acmi.l2.clientmod.unreal.UnrealSerializerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shnok.export.model.Brush;
+import com.shnok.export.model.DataContainer;
 
 import java.io.*;
 import java.util.*;
@@ -13,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String l2Folder = "D:\\Games\\Lineage II";
         String mapName = "17_25_Classic";
-        String brushName = "Brush231";
+        String brushName = "";
 
         Environment environment = Environment.fromIni(new File(l2Folder + "\\system", "l2.ini"));
         UnrealSerializerFactory serializerFactory = new UnrealSerializerFactory(environment);
@@ -23,13 +24,16 @@ public class Main {
         ObjectMapper objectMapper = new ObjectMapper();
         String json;
 
+        List<Brush> brushes = new ArrayList<>();
         if(brushName.isEmpty()) {
-            List<Brush> brushes = BrushExporter.processAllBrushes(up, serializerFactory);
-            json = objectMapper.writeValueAsString(brushes.subList(1, 100));
+            brushes = BrushExporter.processAllBrushes(up, serializerFactory);
         } else {
             Brush brush = BrushExporter.processBrushByName(up, serializerFactory, brushName);
-            json = objectMapper.writeValueAsString(brush);
+            brushes.add(brush);
         }
+
+        DataContainer dataContainer = new DataContainer(brushes);
+        json = objectMapper.writeValueAsString(dataContainer);
 
         FileWriter fw = new FileWriter(mapName + ".json", false);
         BufferedWriter writer = new BufferedWriter(fw);
