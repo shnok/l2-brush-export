@@ -55,7 +55,7 @@ public class BrushExporter {
         Model model = ModelParser.parse(modelEntry, serializerFactory);
 
         UnrealPackage.ExportEntry polyEntry = (UnrealPackage.ExportEntry) up.objectReference(model.getPolyIndex());
-        Poly poly = PolyParser.parse(polyEntry, serializerFactory);
+        Poly poly = PolyParser.parse(up, polyEntry, serializerFactory);
 
         model.setPoly(poly);
         brush.setModel(model);

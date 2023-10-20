@@ -5,6 +5,7 @@ import acmi.l2.clientmod.io.ObjectInputStream;
 import acmi.l2.clientmod.io.UnrealPackage;
 import acmi.l2.clientmod.unreal.UnrealRuntimeContext;
 import acmi.l2.clientmod.unreal.UnrealSerializerFactory;
+import com.shnok.export.Main;
 import com.shnok.export.model.Poly;
 import com.shnok.export.model.PolyData;
 import com.shnok.export.model.Vector3;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PolyParser extends DataParser {
-    public static Poly parse(UnrealPackage.ExportEntry entry, UnrealSerializerFactory serializerFactory) {
+    public static Poly parse(UnrealPackage up, UnrealPackage.ExportEntry entry, UnrealSerializerFactory serializerFactory) {
         ObjectInput<UnrealRuntimeContext> input = new ObjectInputStream<UnrealRuntimeContext>(
                 new ByteArrayInputStream(entry.getObjectRawDataExternally()),
                 entry.getUnrealPackage().getFile().getCharset(),
@@ -42,10 +43,8 @@ public class PolyParser extends DataParser {
         readByte(input);
 
         for(int p = 0 ; p < poly.getPolyCount(); p++) {
-            if(p >= 1) {
-                //return poly;
-            }
             PolyData polyData = new PolyData();
+            polyData.setPolyIndex(p);
 
             System.out.println("=======> Poly Number " + (p+1));
             int vertexCount;
@@ -63,35 +62,26 @@ public class PolyParser extends DataParser {
             // Vertices
             List<Vector3> vertices = new ArrayList<>();
             for (int i = 0; i < vertexCount; i++) {
-                System.out.println("Vertex " + (i + 1) + ": ");
                 vertices.add(readVector3(input));
             }
+
             polyData.setVertices(vertices);
 
-
-
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
+            polyData.setPolyFlags(parsePolyFlags(readInt(input)));
 
             readByte(input);
 
-            /*readByte(input);
+            int textureRef = readObject(input);
+            polyData.setTexture(up.objectReference(textureRef).getObjectFullName());
+
             readByte(input);
             readByte(input);
-            readByte(input);*/
+            readByte(input);
+            readByte(input);
+            readByte(input);
+            readByte(input);
             readInt(input);
             readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
-
-
             polys.add(polyData);
         }
 

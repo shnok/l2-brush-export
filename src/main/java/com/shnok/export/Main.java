@@ -39,35 +39,6 @@ public class Main {
         BufferedWriter writer = new BufferedWriter(fw);
         writer.write(json);
         writer.close();
-
-        /*UnrealPackage.ExportEntry entry = getEntry(up, "Polys933");
-        PolyParser.parse(entry, serializerFactory);*/
-    }
-
-    static UnrealPackage.ExportEntry getEntry(UnrealPackage up, String entryName) {
-        List<UnrealPackage.ExportEntry> exportEntries = up.getExportTable();
-        for (int i = 0; i < exportEntries.size(); i++) {
-            if (exportEntries.get(i).getObjectInnerFullName().equals(entryName)) {
-                System.out.println("========================> " + exportEntries.get(i).getObjectFullName() + " - " + exportEntries.get(i).getObjectClass().getFullClassName());
-                UnrealPackage.ExportEntry entry = (UnrealPackage.ExportEntry) up.getAt(i + 1);
-                return entry;
-            }
-        }
-
-        return null;
-    }
-
-    static UnrealPackage.ExportEntry GetEntryAtOffset(UnrealPackage up, int offset) {
-        List<UnrealPackage.ExportEntry> exportEntries = up.getExportTable();
-        for (int i = 0; i < exportEntries.size(); i++) {
-            if (Math.abs(exportEntries.get(i).getOffset() - offset) <= 100) {
-                System.out.println("========================> BINGO " + exportEntries.get(i).getObjectFullName() + " - " + exportEntries.get(i).getObjectClass().getFullClassName());
-                UnrealPackage.ExportEntry entry = (UnrealPackage.ExportEntry) up.getAt(i + 1);
-                return entry;
-            }
-        }
-
-        return null;
     }
 }
 

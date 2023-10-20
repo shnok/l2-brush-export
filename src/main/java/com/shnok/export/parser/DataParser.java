@@ -45,19 +45,30 @@ public abstract class DataParser {
     }
 
     static int readByte( ObjectInput<UnrealRuntimeContext> input) {
+        return readByte(input, false);
+    }
+    static int readByte( ObjectInput<UnrealRuntimeContext> input, boolean print) {
         // Byte
         int b = (int) PropertiesUtil.read(input, PropertiesUtil.Type.BYTE, false, null, null);
-        System.out.println("Byte " + b);
+        if(print) {
+            System.out.println("Byte " + b + " " + String.format("%02X", b));
+        }
+
         return b;
     }
 
     static Vector3 readVector3(ObjectInput<UnrealRuntimeContext> input) {
+        return readVector3(input, false);
+    }
+
+    static Vector3 readVector3(ObjectInput<UnrealRuntimeContext> input, boolean print) {
         // Float
         float x = (float) PropertiesUtil.read(input, PropertiesUtil.Type.FLOAT, false, null, null);
         float y = (float) PropertiesUtil.read(input, PropertiesUtil.Type.FLOAT, false, null, null);
         float z = (float) PropertiesUtil.read(input, PropertiesUtil.Type.FLOAT, false, null, null);
-
-        System.out.println("Vector3 (" + x + "," + y + "," + z + ")");
+        if(print) {
+            System.out.println("Vector3 (" + x + "," + y + "," + z + ")");
+        }
         return new Vector3(x, y, z);
     }
 
