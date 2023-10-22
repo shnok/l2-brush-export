@@ -6,6 +6,7 @@ import acmi.l2.clientmod.unreal.UnrealSerializerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shnok.export.model.Brush;
 import com.shnok.export.model.DataContainer;
+import com.shnok.export.parser.DataParser;
 
 import java.io.*;
 import java.util.*;
@@ -14,7 +15,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String l2Folder = "D:\\Games\\Lineage II";
         String mapName = "17_25_Classic";
-        String brushName = "";
+        String brushName = "Brush188,Brush192"; //46 53
 
         Environment environment = Environment.fromIni(new File(l2Folder + "\\system", "l2.ini"));
         UnrealSerializerFactory serializerFactory = new UnrealSerializerFactory(environment);
@@ -28,8 +29,7 @@ public class Main {
         if(brushName.isEmpty()) {
             brushes = BrushExporter.processAllBrushes(up, serializerFactory);
         } else {
-            Brush brush = BrushExporter.processBrushByName(up, serializerFactory, brushName);
-            brushes.add(brush);
+            brushes = BrushExporter.processBrushByName(up, serializerFactory, brushName);
         }
 
         DataContainer dataContainer = new DataContainer(brushes);

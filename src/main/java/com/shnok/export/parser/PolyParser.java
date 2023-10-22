@@ -5,7 +5,6 @@ import acmi.l2.clientmod.io.ObjectInputStream;
 import acmi.l2.clientmod.io.UnrealPackage;
 import acmi.l2.clientmod.unreal.UnrealRuntimeContext;
 import acmi.l2.clientmod.unreal.UnrealSerializerFactory;
-import com.shnok.export.Main;
 import com.shnok.export.model.Poly;
 import com.shnok.export.model.PolyData;
 import com.shnok.export.model.Vector3;
@@ -46,7 +45,7 @@ public class PolyParser extends DataParser {
             PolyData polyData = new PolyData();
             polyData.setPolyIndex(p);
 
-            System.out.println("=======> Poly Number " + (p+1));
+            System.out.println("=======> Poly Index " + (p));
             int vertexCount;
             while((vertexCount = readByte(input)) >= 255) {
                 System.out.println("Skipped byte");
@@ -69,19 +68,26 @@ public class PolyParser extends DataParser {
 
             polyData.setPolyFlags(parsePolyFlags(readInt(input)));
 
-            readByte(input);
+            boolean print = p == 4;
+            readByte(input, print);
 
             int textureRef = readObject(input);
             polyData.setTexture(up.objectReference(textureRef).getObjectFullName());
 
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readByte(input);
-            readInt(input);
-            readByte(input);
+            readByte(input, print);
+            readByte(input, print);
+            while(readByte(input) != 129) {
+                System.out.println("Skipped byte");
+            }
+
+            readByte(input, print);
+            readByte(input, print);
+            readByte(input, print);
+            readByte(input, print);
+            readByte(input, print);
+            readByte(input, print);
+            readByte(input, print);
+            readByte(input, print);
             polys.add(polyData);
         }
 
