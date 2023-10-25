@@ -14,8 +14,8 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         String l2Folder = "D:\\Games\\Lineage II";
-        String mapName = "17_25_Classic";
-        String brushName = "Brush188,Brush192"; //46 53
+        String mapName = "16_24_Classic";
+        String brushName = ""; //46 53
 
         Environment environment = Environment.fromIni(new File(l2Folder + "\\system", "l2.ini"));
         UnrealSerializerFactory serializerFactory = new UnrealSerializerFactory(environment);

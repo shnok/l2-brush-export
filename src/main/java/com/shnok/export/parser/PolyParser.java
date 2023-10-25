@@ -72,7 +72,12 @@ public class PolyParser extends DataParser {
             readByte(input, print);
 
             int textureRef = readObject(input);
-            polyData.setTexture(up.objectReference(textureRef).getObjectFullName());
+            try {
+                polyData.setTexture(up.objectReference(textureRef).getObjectFullName());
+            } catch (Exception e) {
+                System.out.println("Didn't find texture at index " + textureRef);
+                System.err.println(e);
+            }
 
             readByte(input, print);
             readByte(input, print);

@@ -37,3 +37,4 @@ gradle-local.properties
 # SonarScanner
 .sonar/
 *.json
+*.bak
