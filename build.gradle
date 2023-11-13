@@ -1,9 +1,10 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'com.shnok.l2brushexport'
-version '1.0-SNAPSHOT'
+version '1.0.0'
 
 repositories {
     mavenCentral()
@@ -24,7 +25,13 @@ test {
     useJUnitPlatform()
 }
 
-task run(type: JavaExec) {
-    main = 'com.shnok.export.Main' // Replace with the fully-qualified name of your main class
-    classpath = sourceSets.main.runtimeClasspath
+mainClassName="com.shnok.export.Main"
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes 'Main-Class': 'com.shnok.export.Main'
+    }
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

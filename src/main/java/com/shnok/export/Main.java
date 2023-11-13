@@ -6,21 +6,34 @@ import acmi.l2.clientmod.unreal.UnrealSerializerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shnok.export.model.Brush;
 import com.shnok.export.model.DataContainer;
-import com.shnok.export.parser.DataParser;
 
 import java.io.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String l2Folder = "D:\\Games\\Lineage II";
-        String mapName = "16_24_Classic";
+        String l2Folder;
+        String mapName;
         String brushName = ""; //46 53
+        if(args.length >= 2) {
+            l2Folder = args[0];
+            mapName = args[1];
+            if(args.length > 2) {
+                brushName = args[2];
+            }
+        } else {
+            System.out.println("Error: Invalid arguments");
+            return;
+        }
 
-        Environment environment = Environment.fromIni(new File(l2Folder + "\\system", "l2.ini"));
+        Path systemFolder = FileSystems.getDefault().getPath(l2Folder, "system");
+        Environment environment = Environment.fromIni(new File(systemFolder.toString(), "l2.ini"));
         UnrealSerializerFactory serializerFactory = new UnrealSerializerFactory(environment);
 
-        UnrealPackage up = new UnrealPackage(new File(l2Folder + "\\maps", mapName + ".unr"), true);
+        Path mapsFolder = FileSystems.getDefault().getPath(l2Folder, "maps");
+        UnrealPackage up = new UnrealPackage(new File(mapsFolder.toString(), mapName + ".unr"), true);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String json;
