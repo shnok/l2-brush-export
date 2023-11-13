@@ -1,0 +1,40 @@
+# Gradle
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+
+# Eclipse
+.settings/
+.classpath
+.project
+
+# Compiled Java classes
+*.class
+
+# Compiled Gradle Plugins and Extensions
+buildSrc/
+
+# Logs
+*.log
+*.log.*
+build.log
+
+# Gradle Wrapper
+gradle-wrapper.jar
+gradle-wrapper.properties
+
+# User-specific Gradle properties
+gradle.properties
+
+# Caches
+.caches/
+
+# Local configuration file (this is usually a symlink to the real file)
+gradle-local.properties
+
+# SonarScanner
+.sonar/
+*.json
+*.bak
